@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MERU — Quiz Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:        #09B582;
+    --brand-dark:   #077a59;
+    --brand-light:  #e6f8f2;
+    --text:         #1a1a1a;
+    --text-muted:   #6b7280;
+    --text-faint:   #9ca3af;
+    --bg:           #f9fafb;
+    --surface:      #ffffff;
+    --border:       #e5e7eb;
+    --radius:       10px;
+    --radius-lg:    14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 4rem; }
+
+  /* ─── Header ── */
+  .site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 8px; background: var(--brand); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-mark svg { display: block; }
+  .firm-name { font-family: 'Segoe UI', sans-serif; font-size: 20px; letter-spacing: 0.04em; color: var(--text); }
+  .header-badge { font-size: 12px; color: #b45309; background: #fffbeb; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+
+  /* ─── Login gate ── */
+  .login-wrap { max-width: 380px; margin: 5rem auto; padding: 0 1.25rem; }
+  .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; }
+  .login-card h2 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 6px; }
+  .login-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .field-row { margin-bottom: 1rem; }
+  .field-row label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+  .field-row input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 15px; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
+  .field-row input:focus { border-color: var(--brand); }
+  .login-btn { width: 100%; padding: 12px; background: var(--brand); border: none; border-radius: var(--radius); font-size: 15px; font-family: 'DM Sans', sans-serif; color: #fff; cursor: pointer; font-weight: 500; transition: background 0.15s; }
+  .login-btn:hover { background: var(--brand-dark); }
+  .login-error { font-size: 13px; color: #dc2626; margin-top: 10px; display: none; text-align: center; }
+
+  /* ─── Dashboard ── */
+  .page { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 0; }
+  .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+  .dash-header h1 { font-family: 'DM Serif Display', serif; font-size: 24px; }
+  .issue-select { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer; }
+
+  /* ─── Stat cards ── */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--text); }
+  .stat-value.green { color: var(--brand-dark); }
+
+  /* ─── Table ── */
+  .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .table-toolbar { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .table-toolbar h2 { font-size: 15px; font-weight: 500; }
+  .search-input { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 7px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text); outline: none; width: 200px; transition: border-color 0.15s; }
+  .search-input:focus { border-color: var(--brand); }
+  .export-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer; transition: background 0.15s; }
+  .export-btn:hover { background: var(--bg); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th { text-align: left; padding: 10px 16px; font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); background: var(--bg); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg); }
+  tbody td { padding: 12px 16px; color: var(--text); vertical-align: middle; }
+  .score-pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .score-high   { background: #f0fdf4; color: #15803d; }
+  .score-mid    { background: #fffbeb; color: #b45309; }
+  .score-low    { background: #fef2f2; color: #b91c1c; }
+  .empty-row td { text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 14px; }
+
+  .loading { text-align: center; padding: 3rem; color: var(--text-muted); font-size: 14px; }
+  .logout-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: transparent; color: var(--text-muted); cursor: pointer; }
+  .logout-btn:hover { color: var(--text); border-color: #d1d5db; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     CONFIGURATION
+     ═══════════════════════════════════════════════ -->
+<script>
+// ① Same Google Apps Script URL as in meru-quiz.html
+const SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+// ② Set your admin password here
+const ADMIN_PASSWORD = 'meru2025';
+</script>
+
+<header class="site-header">
+  <div class="logo-area">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 15V5l7 6 7-6v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="firm-name">MERU</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span class="header-badge">Admin</span>
+    <button class="logout-btn" id="logout-btn" style="display:none" onclick="logout()">Sign out</button>
+  </div>
+</header>
+
+<div id="login-section">
+  <div class="login-wrap">
+    <div class="login-card">
+      <h2>Admin access</h2>
+      <p>Enter the admin password to view quiz results.</p>
+      <div class="field-row">
+        <label for="pw-input">Password</label>
+        <input type="password" id="pw-input" placeholder="••••••••" />
+      </div>
+      <button class="login-btn" onclick="tryLogin()">Sign in →</button>
+      <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+    </div>
+  </div>
+</div>
+
+<div id="dashboard-section" style="display:none">
+  <main class="page">
+    <div class="dash-header">
+      <h1>Quiz results</h1>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select class="issue-select" id="issue-filter" onchange="filterByIssue()">
+          <option value="all">All issues</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card"><div class="stat-label">Participants</div><div class="stat-value" id="stat-count">—</div></div>
+      <div class="stat-card"><div class="stat-label">Avg score</div><div class="stat-value green" id="stat-avg">—</div></div>
+      <div class="stat-card"><div class="stat-label">Top score</div><div class="stat-value" id="stat-top">—</div></div>
+      <div class="stat-card"><div class="stat-label">Perfect scores</div><div class="stat-value" id="stat-perfect">—</div></div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-toolbar">
+        <h2>Submissions</h2>
+        <div style="display:flex;gap:8px">
+          <input class="search-input" id="search-input" type="text" placeholder="Search name…" oninput="renderTable()" />
+          <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+        </div>
+      </div>
+      <div id="table-wrap"><div class="loading">Loading results…</div></div>
+    </div>
+  </main>
+</div>
+
+<script>
+let allRows = [];
+let filteredRows = [];
+
+// ── Auth ───────────────────────────────────────────────
+function tryLogin() {
+  const pw = document.getElementById('pw-input').value;
+  if (pw === ADMIN_PASSWORD) {
+    sessionStorage.setItem('meru_admin', '1');
+    showDashboard();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+function logout() {
+  sessionStorage.removeItem('meru_admin');
+  document.getElementById('dashboard-section').style.display = 'none';
+  document.getElementById('login-section').style.display = 'block';
+  document.getElementById('logout-btn').style.display = 'none';
+}
+
+function showDashboard() {
+  document.getElementById('login-section').style.display = 'none';
+  document.getElementById('dashboard-section').style.display = 'block';
+  document.getElementById('logout-btn').style.display = 'inline-block';
+  loadData();
+}
+
+if (sessionStorage.getItem('meru_admin') === '1') showDashboard();
+
+// ── Data ───────────────────────────────────────────────
+function loadData() {
+  if (SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    allRows = SAMPLE_DATA;
+    initDashboard();
+    return;
+  }
+  fetch(SHEET_URL + '?action=getResults')
+    .then(r => r.json())
+    .then(data => {
+      allRows = data;
+      initDashboard();
+    })
+    .catch(() => {
+      document.getElementById('table-wrap').innerHTML =
+        '<div class="loading">Could not load data. Check your Apps Script URL and permissions.</div>';
+    });
+}
+
+// Sample data shown when SHEET_URL is not yet configured
+const SAMPLE_DATA = [
+  { timestamp: '2025-06-09 09:14', issue: 'Newsletter · Issue #1', name: 'Alex Johnson',  email: 'alex@meru.com',  score: 5, total: 5, pct: 100 },
+  { timestamp: '2025-06-09 09:31', issue: 'Newsletter · Issue #1', name: 'Maria Chen',    email: 'maria@meru.com', score: 4, total: 5, pct: 80  },
+  { timestamp: '2025-06-09 10:02', issue: 'Newsletter · Issue #1', name: 'James Wright',  email: '',               score: 3, total: 5, pct: 60  },
+  { timestamp: '2025-06-09 10:45', issue: 'Newsletter · Issue #1', name: 'Priya Sharma',  email: 'priya@meru.com', score: 5, total: 5, pct: 100 },
+  { timestamp: '2025-06-09 11:10', issue: 'Newsletter · Issue #1', name: 'Tom Okafor',    email: 'tom@meru.com',   score: 2, total: 5, pct: 40  },
+];
+
+function initDashboard() {
+  // Populate issue filter
+  const issues = [...new Set(allRows.map(r => r.issue).filter(Boolean))].sort();
+  const sel = document.getElementById('issue-filter');
+  issues.forEach(iss => {
+    const opt = document.createElement('option');
+    opt.value = iss;
+    opt.textContent = iss;
+    sel.appendChild(opt);
+  });
+  filteredRows = [...allRows];
+  updateStats();
+  renderTable();
+}
+
+function filterByIssue() {
+  const val = document.getElementById('issue-filter').value;
+  filteredRows = val === 'all' ? [...allRows] : allRows.filter(r => r.issue === val);
+  updateStats();
+  renderTable();
+}
+
+function updateStats() {
+  const n = filteredRows.length;
+  document.getElementById('stat-count').textContent = n;
+  if (n === 0) {
+    document.getElementById('stat-avg').textContent = '—';
+    document.getElementById('stat-top').textContent = '—';
+    document.getElementById('stat-perfect').textContent = '—';
+    return;
+  }
+  const avg = Math.round(filteredRows.reduce((s, r) => s + r.pct, 0) / n);
+  const top = Math.max(...filteredRows.map(r => r.pct));
+  const perfect = filteredRows.filter(r => r.pct === 100).length;
+  document.getElementById('stat-avg').textContent = avg + '%';
+  document.getElementById('stat-top').textContent = top + '%';
+  document.getElementById('stat-perfect').textContent = perfect;
+}
+
+function renderTable() {
+  const query = (document.getElementById('search-input').value || '').toLowerCase();
+  const rows = filteredRows.filter(r => !query || r.name.toLowerCase().includes(query));
+
+  if (rows.length === 0) {
+    document.getElementById('table-wrap').innerHTML = `
+      <table><thead><tr>
+        <th>Name</th><th>Email</th><th>Issue</th><th>Score</th><th>Submitted</th>
+      </tr></thead><tbody>
+        <tr class="empty-row"><td colspan="5">No results found.</td></tr>
+      </tbody></table>`;
+    return;
+  }
+
+  const rowsHTML = rows.map(r => {
+    const pillCls = r.pct === 100 ? 'score-high' : r.pct >= 60 ? 'score-mid' : 'score-low';
+    return `<tr>
+      <td style="font-weight:500">${esc(r.name)}</td>
+      <td style="color:var(--text-muted)">${esc(r.email || '—')}</td>
+      <td style="color:var(--text-muted);font-size:13px">${esc(r.issue || '—')}</td>
+      <td><span class="score-pill ${pillCls}">${r.score}/${r.total} &nbsp;${r.pct}%</span></td>
+      <td style="color:var(--text-muted);font-size:13px">${esc(r.timestamp || '—')}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('table-wrap').innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Name</th><th>Email</th><th>Issue</th><th>Score</th><th>Submitted</th>
+      </tr></thead>
+      <tbody>${rowsHTML}</tbody>
+    </table>`;
+}
+
+function esc(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function exportCSV() {
+  const query = (document.getElementById('search-input').value || '').toLowerCase();
+  const rows = filteredRows.filter(r => !query || r.name.toLowerCase().includes(query));
+  const header = ['Name','Email','Issue','Score','Out of','Percent','Submitted'];
+  const lines = [header.join(',')].concat(rows.map(r =>
+    [r.name, r.email, r.issue, r.score, r.total, r.pct + '%', r.timestamp]
+      .map(v => '"' + String(v || '').replace(/"/g, '""') + '"').join(',')
+  ));
+  const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'meru-quiz-results.csv';
+  a.click();
+}
+</script>
+</body>
+</html>

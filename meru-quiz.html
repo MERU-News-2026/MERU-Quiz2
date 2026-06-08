@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MERU — Weekly Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ─── Brand ─────────────────────────────────────────── */
+  :root {
+    --brand:        #09B582;
+    --brand-dark:   #077a59;
+    --brand-light:  #e6f8f2;
+    --text:         #1a1a1a;
+    --text-muted:   #6b7280;
+    --text-faint:   #9ca3af;
+    --bg:           #f9fafb;
+    --surface:      #ffffff;
+    --border:       #e5e7eb;
+    --radius:       10px;
+    --radius-lg:    14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 4rem; }
+
+  /* ─── Header ─────────────────────────────────────────── */
+  .site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 8px; background: var(--brand); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-mark svg { display: block; }
+  .firm-name { font-family: 'Segoe UI', sans-serif; font-size: 20px; letter-spacing: 0.04em; color: var(--text); }
+  .header-badge { font-size: 12px; color: var(--brand-dark); background: var(--brand-light); padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+
+  /* ─── Hero ───────────────────────────────────────────── */
+  .hero { background: var(--brand); padding: 2.5rem 2rem 2rem; text-align: center; }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 8px; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: #fff; margin-bottom: 6px; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.8); }
+
+  /* ─── Layout ──────────────────────────────────────────── */
+  .page { max-width: 640px; margin: 0 auto; padding: 2rem 1.25rem 0; }
+
+  /* ─── Name gate ───────────────────────────────────────── */
+  .name-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; animation: fadeUp 0.2s ease; }
+  .name-card h2 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 6px; }
+  .name-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+  .field-row { margin-bottom: 1rem; }
+  .field-row label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+  .field-row input { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 15px; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.15s; }
+  .field-row input:focus { border-color: var(--brand); }
+  .start-btn { width: 100%; padding: 12px; background: var(--brand); border: none; border-radius: var(--radius); font-size: 15px; font-family: 'DM Sans', sans-serif; color: #fff; cursor: pointer; font-weight: 500; transition: background 0.15s; margin-top: 0.5rem; }
+  .start-btn:hover { background: var(--brand-dark); }
+  .field-error { font-size: 12px; color: #dc2626; margin-top: 4px; display: none; }
+
+  /* ─── Progress ───────────────────────────────────────── */
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+  .progress-track { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--brand); border-radius: 2px; transition: width 0.35s ease; }
+  .progress-label { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+
+  /* ─── Question card ───────────────────────────────────── */
+  .q-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1rem; animation: fadeUp 0.2s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .cat-pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 0.02em; }
+  .cat-industry { background: #eff6ff; color: #1d4ed8; }
+  .cat-news     { background: #fffbeb; color: #b45309; }
+  .cat-general  { background: var(--brand-light); color: var(--brand-dark); }
+  .q-text { font-size: 17px; font-weight: 500; line-height: 1.55; color: var(--text); margin-bottom: 1.25rem; }
+
+  /* ─── Options ─────────────────────────────────────────── */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 11px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--text); cursor: pointer; text-align: left; transition: border-color 0.15s, background 0.15s; line-height: 1.4; }
+  .opt:hover:not(:disabled) { border-color: var(--brand); background: var(--brand-light); }
+  .opt.correct { background: #f0fdf4; border-color: #16a34a; color: #15803d; }
+  .opt.wrong   { background: #fef2f2; border-color: #dc2626; color: #b91c1c; }
+  .opt:disabled { cursor: default; }
+  .explanation { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); line-height: 1.65; display: none; }
+
+  /* ─── Nav ──────────────────────────────────────────────── */
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+  .nav-btn { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 9px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .nav-btn:hover:not(:disabled) { background: var(--bg); border-color: #d1d5db; }
+  .nav-btn.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .nav-btn.primary:hover:not(:disabled) { background: var(--brand-dark); border-color: var(--brand-dark); }
+  .nav-btn:disabled { opacity: 0.35; cursor: default; }
+
+  /* ─── Score card ──────────────────────────────────────── */
+  .score-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 2rem; text-align: center; animation: fadeUp 0.25s ease; }
+  .score-ring { width: 88px; height: 88px; border-radius: 50%; background: var(--brand-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+  .score-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--brand-dark); line-height: 1; }
+  .score-pct { font-size: 13px; color: var(--text-muted); margin-bottom: 1rem; }
+  .score-msg { font-size: 16px; color: var(--text); margin-bottom: 1.75rem; line-height: 1.5; }
+  .score-actions { display: flex; gap: 10px; justify-content: center; }
+  .restart-btn { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 10px 22px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; transition: background 0.15s; }
+  .restart-btn:hover { background: var(--bg); }
+  .submit-note { font-size: 12px; color: var(--text-faint); margin-top: 1rem; }
+
+  /* ─── Footer ──────────────────────────────────────────── */
+  .site-footer { text-align: center; margin-top: 3rem; font-size: 12px; color: var(--text-faint); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     CONFIGURATION — update these each week
+     ═══════════════════════════════════════════════ -->
+<script>
+// ① Paste your Google Apps Script URL here after setup
+const SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+// ② Update issue info each week
+const ISSUE_LABEL = 'Newsletter · Issue #1';
+const ISSUE_DATE  = 'Week of June 9, 2025';
+
+// ③ Questions — edit each week
+//    category: "industry" | "news" | "general"
+//    answer: index of correct option (0 = first)
+const QUESTIONS = [
+  {
+    category: "industry",
+    categoryLabel: "Industry",
+    text: "What does the Federal Reserve's 'dual mandate' refer to?",
+    options: [
+      "Controlling inflation and regulating banks",
+      "Maximizing employment and stabilizing prices",
+      "Setting tax policy and managing the federal budget",
+      "Overseeing monetary policy and fiscal stimulus"
+    ],
+    answer: 1,
+    explanation: "The Fed's dual mandate, established by Congress, is to promote maximum employment and stable prices (low inflation). It does not set tax policy or regulate all banks."
+  },
+  {
+    category: "industry",
+    categoryLabel: "Industry",
+    text: "Which financial ratio measures a company's ability to pay short-term obligations?",
+    options: ["P/E ratio", "Debt-to-equity ratio", "Current ratio", "Return on equity"],
+    answer: 2,
+    explanation: "The current ratio (current assets ÷ current liabilities) measures short-term liquidity. A ratio above 1 means the company can cover its near-term obligations."
+  },
+  {
+    category: "news",
+    categoryLabel: "Current events",
+    text: "Which country hosted the G7 summit in 2025?",
+    options: ["Japan", "Canada", "Italy", "France"],
+    answer: 1,
+    explanation: "Canada hosted the G7 summit in 2025 in Kananaskis, Alberta — the same location it used for the 2002 summit."
+  },
+  {
+    category: "general",
+    categoryLabel: "General knowledge",
+    text: "How many time zones does the contiguous United States span?",
+    options: ["3", "4", "5", "6"],
+    answer: 1,
+    explanation: "The 48 contiguous states span 4 time zones: Eastern, Central, Mountain, and Pacific. Alaska and Hawaii add two more when counting all 50 states."
+  },
+  {
+    category: "general",
+    categoryLabel: "General knowledge",
+    text: "What is the world's largest ocean by surface area?",
+    options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    answer: 3,
+    explanation: "The Pacific Ocean covers about 165 million square kilometers — more than all of Earth's land combined, and roughly twice the size of the Atlantic."
+  }
+];
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER — replace logo-mark with your <img> tag
+     ═══════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="logo-area">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 15V5l7 6 7-6v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="firm-name">MERU</span>
+  </div>
+  <span class="header-badge">Weekly quiz</span>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow" id="hero-eyebrow"></div>
+  <div class="hero-title">This week's quiz</div>
+  <div class="hero-sub">5 questions · Industry, current events &amp; general knowledge</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     QUIZ — no edits needed below this line
+     ═══════════════════════════════════════════════ -->
+<main class="page" id="main">
+  <div id="name-gate"></div>
+
+  <div id="quiz-section" style="display:none">
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <span class="progress-label" id="progress-label">1 of 5</span>
+    </div>
+    <div id="quiz-body"></div>
+    <div class="nav-row" id="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">← Back</button>
+      <button class="nav-btn primary" id="next-btn" onclick="navigate(1)">Next →</button>
+    </div>
+  </div>
+
+  <div class="site-footer">MERU &mdash; Internal newsletter quiz</div>
+</main>
+
+<script>
+document.getElementById('hero-eyebrow').textContent = ISSUE_LABEL;
+
+let participantName = '';
+let participantEmail = '';
+let current = 0;
+let answered = new Array(QUESTIONS.length).fill(null);
+let showingScore = false;
+let submitted = false;
+
+// ── Name gate ──────────────────────────────────────────
+function renderNameGate() {
+  document.getElementById('name-gate').innerHTML = `
+    <div class="name-card">
+      <h2>Before you start</h2>
+      <p>Enter your name to take this week's quiz. Your score will be recorded.</p>
+      <div class="field-row">
+        <label for="inp-name">Full name</label>
+        <input type="text" id="inp-name" placeholder="Jane Smith" autocomplete="name" />
+        <div class="field-error" id="err-name">Please enter your name.</div>
+      </div>
+      <div class="field-row">
+        <label for="inp-email">Work email <span style="font-weight:400;color:var(--text-faint)">(optional)</span></label>
+        <input type="email" id="inp-email" placeholder="jane@meruadvisors.com" autocomplete="email" />
+      </div>
+      <button class="start-btn" onclick="startQuiz()">Start quiz →</button>
+    </div>
+  `;
+  document.getElementById('inp-name').addEventListener('keydown', e => { if (e.key === 'Enter') startQuiz(); });
+}
+
+function startQuiz() {
+  const nameEl = document.getElementById('inp-name');
+  const name = nameEl.value.trim();
+  if (!name) {
+    document.getElementById('err-name').style.display = 'block';
+    nameEl.focus();
+    return;
+  }
+  participantName  = name;
+  participantEmail = document.getElementById('inp-email').value.trim();
+  document.getElementById('name-gate').style.display = 'none';
+  document.getElementById('quiz-section').style.display = 'block';
+  render();
+}
+
+// ── Quiz engine ────────────────────────────────────────
+function catClass(cat) {
+  return cat === 'industry' ? 'cat-industry' : cat === 'news' ? 'cat-news' : 'cat-general';
+}
+
+function updateProgress() {
+  const done = answered.filter(a => a !== null).length;
+  document.getElementById('progress-fill').style.width = Math.round((done / QUESTIONS.length) * 100) + '%';
+  document.getElementById('progress-label').textContent = (current + 1) + ' of ' + QUESTIONS.length;
+}
+
+function render() {
+  if (showingScore) { renderScore(); return; }
+  const q = QUESTIONS[current];
+  const userAns = answered[current];
+  updateProgress();
+
+  document.getElementById('prev-btn').disabled = current === 0;
+  const isLast = current === QUESTIONS.length - 1;
+  const nextBtn = document.getElementById('next-btn');
+  if (isLast && answered.every(a => a !== null)) {
+    nextBtn.textContent = 'See results →';
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.disabled = isLast && userAns === null;
+  }
+  document.getElementById('nav-row').style.display = 'flex';
+
+  let optsHTML = '';
+  q.options.forEach((opt, i) => {
+    let cls = 'opt';
+    if (userAns !== null) {
+      if (i === q.answer) cls += ' correct';
+      else if (i === userAns) cls += ' wrong';
+    }
+    optsHTML += `<button class="${cls}" ${userAns !== null ? 'disabled' : ''} onclick="choose(${i})">${opt}</button>`;
+  });
+
+  document.getElementById('quiz-body').innerHTML = `
+    <div class="q-card">
+      <span class="cat-pill ${catClass(q.category)}">${q.categoryLabel}</span>
+      <div class="q-text">${q.text}</div>
+      <div class="options">${optsHTML}</div>
+      <div class="explanation" style="display:${userAns !== null ? 'block' : 'none'}">${q.explanation}</div>
+    </div>
+  `;
+}
+
+function choose(idx) {
+  if (answered[current] !== null) return;
+  answered[current] = idx;
+  render();
+}
+
+function navigate(dir) {
+  if (showingScore) return;
+  const isLast = current === QUESTIONS.length - 1;
+  if (dir === 1 && isLast && answered.every(a => a !== null)) {
+    showingScore = true;
+    submitResult();
+    render();
+    return;
+  }
+  current = Math.max(0, Math.min(QUESTIONS.length - 1, current + dir));
+  render();
+}
+
+// ── Score & submission ─────────────────────────────────
+function renderScore() {
+  const correct = answered.filter((a, i) => a === QUESTIONS[i].answer).length;
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  let msg;
+  if (pct === 100)     msg = 'Perfect score — outstanding work!';
+  else if (pct >= 80)  msg = 'Great result. Review the explanations for anything you missed.';
+  else if (pct >= 60)  msg = 'Solid effort. Check the explanations and come back next week.';
+  else                 msg = "Nice try — review this week's answers and see you next Monday.";
+
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-label').textContent = 'Complete';
+  document.getElementById('nav-row').style.display = 'none';
+
+  document.getElementById('quiz-body').innerHTML = `
+    <div class="score-card">
+      <div class="score-ring"><div class="score-num">${correct}/${QUESTIONS.length}</div></div>
+      <div class="score-pct">${pct}% correct</div>
+      <div class="score-msg">${msg}</div>
+      <div class="score-actions">
+        <button class="restart-btn" onclick="restart()">Try again</button>
+      </div>
+      <div class="submit-note" id="submit-note">Saving your result…</div>
+    </div>
+  `;
+}
+
+function submitResult() {
+  if (submitted || SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+    setTimeout(() => {
+      const note = document.getElementById('submit-note');
+      if (note) note.textContent = SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'
+        ? '(Tracking not yet connected — see setup instructions)'
+        : 'Result saved.';
+    }, 500);
+    return;
+  }
+  submitted = true;
+
+  const correct = answered.filter((a, i) => a === QUESTIONS[i].answer).length;
+  const payload = {
+    issue:   ISSUE_LABEL,
+    name:    participantName,
+    email:   participantEmail,
+    score:   correct,
+    total:   QUESTIONS.length,
+    pct:     Math.round((correct / QUESTIONS.length) * 100),
+    answers: answered.map((a, i) => ({
+      q:       QUESTIONS[i].text,
+      chosen:  a !== null ? QUESTIONS[i].options[a] : '',
+      correct: QUESTIONS[i].options[QUESTIONS[i].answer],
+      right:   a === QUESTIONS[i].answer
+    }))
+  };
+
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    const note = document.getElementById('submit-note');
+    if (note) note.textContent = 'Result saved.';
+  }).catch(() => {
+    const note = document.getElementById('submit-note');
+    if (note) note.textContent = 'Could not save result — check your connection.';
+  });
+}
+
+function restart() {
+  current = 0;
+  answered = new Array(QUESTIONS.length).fill(null);
+  showingScore = false;
+  submitted = false;
+  document.getElementById('nav-row').style.display = 'flex';
+  render();
+}
+
+renderNameGate();
+</script>
+</body>
+</html>
