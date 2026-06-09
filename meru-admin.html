@@ -202,7 +202,7 @@ function loadData() {
   fetch(SHEET_URL + '?action=getResults')
     .then(r => r.json())
     .then(data => {
-      allRows = data;
+      allRows = data.map(r => ({ ...r, pct: parseInt(String(r.pct).replace('%', '')) || 0 }));
       initDashboard();
     })
     .catch(() => {
