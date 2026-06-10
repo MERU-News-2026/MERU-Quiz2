@@ -323,7 +323,7 @@ function navigate(dir) {
 function renderScore() {
   const correct = answered.filter((a, i) => a === QUESTIONS[i].answer).length;
   const pct = Math.round((correct / QUESTIONS.length) * 100);
-  const msg = 'Results will be revealed on Friday.';
+  const msg = 'Answers will be revealed on Friday.';
 
   document.getElementById('progress-fill').style.width = '100%';
   document.getElementById('progress-label').textContent = 'Complete';
