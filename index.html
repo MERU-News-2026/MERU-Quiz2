@@ -75,6 +75,7 @@
   .opt:hover:not(:disabled) { border-color: var(--brand); background: var(--brand-light); }
   .opt.correct { background: #f0fdf4; border-color: #16a34a; color: #15803d; }
   .opt.wrong   { background: #fef2f2; border-color: #dc2626; color: #b91c1c; }
+  .opt.selected { background: var(--brand-light); border-color: var(--brand); color: var(--brand-dark); }
   .opt:disabled { cursor: default; }
   .explanation { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); line-height: 1.65; display: none; }
 
@@ -286,10 +287,7 @@ function render() {
   let optsHTML = '';
   q.options.forEach((opt, i) => {
     let cls = 'opt';
-    if (userAns !== null) {
-      if (i === q.answer) cls += ' correct';
-      else if (i === userAns) cls += ' wrong';
-    }
+    if (userAns !== null && i === userAns) cls += ' selected';
     optsHTML += `<button class="${cls}" ${userAns !== null ? 'disabled' : ''} onclick="choose(${i})">${opt}</button>`;
   });
 
@@ -298,7 +296,6 @@ function render() {
       <span class="cat-pill ${catClass(q.category)}">${q.categoryLabel}</span>
       <div class="q-text">${q.text}</div>
       <div class="options">${optsHTML}</div>
-      <div class="explanation" style="display:${userAns !== null ? 'block' : 'none'}">${q.explanation}</div>
     </div>
   `;
 }
@@ -326,11 +323,7 @@ function navigate(dir) {
 function renderScore() {
   const correct = answered.filter((a, i) => a === QUESTIONS[i].answer).length;
   const pct = Math.round((correct / QUESTIONS.length) * 100);
-  let msg;
-  if (pct === 100)     msg = 'Perfect score — outstanding work!';
-  else if (pct >= 80)  msg = 'Great result. Review the explanations for anything you missed.';
-  else if (pct >= 60)  msg = 'Solid effort. Check the explanations and come back next week.';
-  else                 msg = "Nice try — review this week's answers and see you next Monday.";
+  const msg = 'Results will be revealed on Friday.';
 
   document.getElementById('progress-fill').style.width = '100%';
   document.getElementById('progress-label').textContent = 'Complete';
