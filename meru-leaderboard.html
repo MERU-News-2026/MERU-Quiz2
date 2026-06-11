@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MERU — Quiz Leaderboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:        #09B582;
+    --brand-dark:   #077a59;
+    --brand-light:  #e6f8f2;
+    --gold:         #d4a017;
+    --gold-light:   #fdf6e3;
+    --silver:       #8a93a3;
+    --silver-light: #f1f3f6;
+    --bronze:       #b46a3c;
+    --bronze-light: #faf0e8;
+    --text:         #1a1a1a;
+    --text-muted:   #6b7280;
+    --text-faint:   #9ca3af;
+    --bg:           #f9fafb;
+    --surface:      #ffffff;
+    --border:       #e5e7eb;
+    --radius:       10px;
+    --radius-lg:    14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 4rem; }
+
+  .site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-mark { width: 36px; height: 36px; border-radius: 8px; background: var(--brand); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .firm-name { font-family: 'Segoe UI', sans-serif; font-size: 20px; letter-spacing: 0.04em; color: var(--text); }
+  .header-badge { font-size: 12px; color: var(--brand-dark); background: var(--brand-light); padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+
+  .hero { background: var(--brand); padding: 2.5rem 2rem 2rem; text-align: center; }
+  .hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 8px; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: #fff; margin-bottom: 6px; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.8); }
+
+  .page { max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 0; }
+
+  /* ── Controls ─────────────────────────────────────── */
+  .controls { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .controls label { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-right: 8px; }
+  .controls select { font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer; outline: none; }
+  .controls select:focus { border-color: var(--brand); }
+  .copy-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 9px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+  .copy-btn:hover { background: var(--brand-light); border-color: var(--brand); color: var(--brand-dark); }
+
+  /* ── Podium ───────────────────────────────────────── */
+  .podium { display: flex; align-items: flex-end; justify-content: center; gap: 12px; margin-bottom: 1.5rem; }
+  .podium-slot { flex: 1; max-width: 190px; text-align: center; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface); padding: 1.25rem 0.75rem 1rem; animation: fadeUp 0.25s ease; }
+  .podium-slot.first  { border-color: var(--gold);   background: var(--gold-light);   padding-top: 1.75rem; }
+  .podium-slot.second { border-color: var(--silver); background: var(--silver-light); }
+  .podium-slot.third  { border-color: var(--bronze); background: var(--bronze-light); }
+  .podium-medal { font-size: 26px; line-height: 1; margin-bottom: 8px; }
+  .podium-name { font-weight: 700; font-size: 15px; margin-bottom: 2px; word-break: break-word; }
+  .podium-points { font-family: 'DM Serif Display', serif; font-size: 24px; line-height: 1.2; }
+  .podium-slot.first  .podium-points { color: var(--gold); }
+  .podium-slot.second .podium-points { color: var(--silver); }
+  .podium-slot.third  .podium-points { color: var(--bronze); }
+  .podium-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ── Table ────────────────────────────────────────── */
+  .board-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; animation: fadeUp 0.25s ease; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg); }
+  td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  .rank-cell { width: 48px; font-weight: 700; color: var(--text-muted); }
+  .points-cell { font-weight: 700; color: var(--brand-dark); white-space: nowrap; }
+  .muted { color: var(--text-muted); font-size: 13px; }
+  tr.top-3 td { background: #fbfdfc; }
+
+  .loading, .empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); font-size: 14px; }
+
+  .footnote { font-size: 12px; color: var(--text-faint); margin-top: 1rem; text-align: center; line-height: 1.6; }
+  .site-footer { text-align: center; margin-top: 3rem; font-size: 12px; color: var(--text-faint); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) { .podium-slot, .board-card { animation: none; } }
+  @media (max-width: 520px) {
+    .podium { flex-direction: column; align-items: stretch; }
+    .podium-slot { max-width: none; }
+    .hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     CONFIGURATION
+     ═══════════════════════════════════════════════ -->
+<script>
+// ① Same Apps Script URL used by the quiz and admin pages.
+//    If you ever redeploy the Apps Script with a NEW deployment,
+//    update the URL here too.
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
+
+// ② Scoring policy when someone takes the SAME issue more than once:
+//    'first' = count only their first submission (fairest)
+//    'best'  = count their highest score for that issue
+const ATTEMPT_POLICY = 'first';
+</script>
+
+<header class="site-header">
+  <div class="logo-area">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 15V5l7 6 7-6v10" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="firm-name">MERU</span>
+  </div>
+  <span class="header-badge">Leaderboard</span>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow" id="hero-eyebrow">Monthly standings</div>
+  <div class="hero-title">Quiz leaderboard</div>
+  <div class="hero-sub" id="hero-sub">Points from every weekly quiz, added up</div>
+</div>
+
+<main class="page">
+  <div class="controls">
+    <div>
+      <label for="month-filter">Showing</label>
+      <select id="month-filter" onchange="renderBoard()"></select>
+    </div>
+    <button class="copy-btn" id="copy-btn" onclick="copyForNewsletter()" style="display:none">Copy for newsletter</button>
+  </div>
+
+  <div id="board"><div class="loading">Loading results&hellip;</div></div>
+
+  <div class="footnote" id="footnote" style="display:none">
+    Points = total correct answers across all quizzes in the period.
+    Ties are broken by accuracy, then by quizzes completed.
+  </div>
+
+  <div class="site-footer">MERU &mdash; Internal newsletter quiz</div>
+</main>
+
+<script>
+let allRows = [];
+let standings = []; // current rendered standings, used by copyForNewsletter
+
+// ── Load data from the same endpoint the admin page uses ──
+fetch(SHEET_URL + '?action=getResults')
+  .then(r => r.json())
+  .then(data => {
+    allRows = (data || []).map(r => ({
+      ...r,
+      name: String(r.name || '').trim(),
+      date: parseTs(r.timestamp)
+    })).filter(r => r.name);
+    buildMonthFilter();
+    renderBoard();
+  })
+  .catch(() => {
+    document.getElementById('board').innerHTML =
+      '<div class="empty">Could not load results. Check the Apps Script URL and that the deployment is set to &ldquo;Anyone&rdquo;.</div>';
+  });
+
+// Timestamps are saved like "6/9/2025, 9:14:32 AM" (en-US). Browsers parse
+// that fine with new Date(); fall back gracefully if a row is odd.
+function parseTs(ts) {
+  const d = new Date(ts);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function monthKey(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
+function monthLabel(key) {
+  const [y, m] = key.split('-');
+  return MONTH_NAMES[parseInt(m, 10) - 1] + ' ' + y;
+}
+
+function buildMonthFilter() {
+  const keys = [...new Set(allRows.filter(r => r.date).map(r => monthKey(r.date)))].sort().reverse();
+  const sel = document.getElementById('month-filter');
+  sel.innerHTML = '';
+  keys.forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.textContent = monthLabel(k);
+    sel.appendChild(opt);
+  });
+  const all = document.createElement('option');
+  all.value = 'all';
+  all.textContent = 'All time';
+  sel.appendChild(all);
+}
+
+// ── Aggregate: one entry per person per issue, then sum ──
+function computeStandings(rows) {
+  // Step 1: dedupe attempts on the same issue per person
+  const attemptMap = new Map(); // "name|issue" -> row
+  rows.forEach(r => {
+    const key = r.name.toLowerCase() + '|' + (r.issue || '');
+    const existing = attemptMap.get(key);
+    if (!existing) { attemptMap.set(key, r); return; }
+    if (ATTEMPT_POLICY === 'best') {
+      if ((r.score || 0) > (existing.score || 0)) attemptMap.set(key, r);
+    } else {
+      // 'first' — keep the earlier submission
+      if (r.date && existing.date && r.date < existing.date) attemptMap.set(key, r);
+    }
+  });
+
+  // Step 2: sum per person
+  const people = new Map(); // lowercase name -> stats
+  [...attemptMap.values()].forEach(r => {
+    const key = r.name.toLowerCase();
+    if (!people.has(key)) {
+      people.set(key, { name: r.name, points: 0, possible: 0, quizzes: 0 });
+    }
+    const p = people.get(key);
+    p.points   += Number(r.score) || 0;
+    p.possible += Number(r.total) || 0;
+    p.quizzes  += 1;
+  });
+
+  // Step 3: rank — points desc, then accuracy desc, then quizzes desc
+  const list = [...people.values()];
+  list.forEach(p => { p.accuracy = p.possible ? Math.round((p.points / p.possible) * 100) : 0; });
+  list.sort((a, b) =>
+    b.points - a.points ||
+    b.accuracy - a.accuracy ||
+    b.quizzes - a.quizzes ||
+    a.name.localeCompare(b.name)
+  );
+
+  // Assign ranks with ties sharing a rank
+  let rank = 0, prev = null;
+  list.forEach((p, i) => {
+    if (!prev || p.points !== prev.points || p.accuracy !== prev.accuracy || p.quizzes !== prev.quizzes) rank = i + 1;
+    p.rank = rank;
+    prev = p;
+  });
+  return list;
+}
+
+function renderBoard() {
+  const sel = document.getElementById('month-filter');
+  const val = sel.value;
+  const rows = val === 'all'
+    ? allRows
+    : allRows.filter(r => r.date && monthKey(r.date) === val);
+
+  document.getElementById('hero-eyebrow').textContent =
+    val === 'all' ? 'All-time standings' : monthLabel(val) + ' standings';
+
+  standings = computeStandings(rows);
+  const board = document.getElementById('board');
+  const copyBtn = document.getElementById('copy-btn');
+  const footnote = document.getElementById('footnote');
+
+  if (!standings.length) {
+    board.innerHTML = '<div class="empty">No quiz results for this period yet.</div>';
+    copyBtn.style.display = 'none';
+    footnote.style.display = 'none';
+    return;
+  }
+  copyBtn.style.display = 'inline-block';
+  footnote.style.display = 'block';
+
+  // Podium (top 3) — render in 2nd / 1st / 3rd order for the classic shape
+  const medals = ['🥇', '🥈', '🥉'];
+  const slotCls = ['first', 'second', 'third'];
+  const top3 = standings.slice(0, 3);
+  const order = top3.length === 3 ? [1, 0, 2] : top3.map((_, i) => i);
+  let podiumHTML = '';
+  if (top3.length >= 2) {
+    podiumHTML = '<div class="podium">' + order.map(i => {
+      const p = top3[i];
+      return `<div class="podium-slot ${slotCls[i]}">
+        <div class="podium-medal">${medals[i]}</div>
+        <div class="podium-name">${esc(p.name)}</div>
+        <div class="podium-points">${p.points} pts</div>
+        <div class="podium-meta">${p.accuracy}% &middot; ${p.quizzes} quiz${p.quizzes === 1 ? '' : 'zes'}</div>
+      </div>`;
+    }).join('') + '</div>';
+  }
+
+  const rowsHTML = standings.map(p => `
+    <tr class="${p.rank <= 3 ? 'top-3' : ''}">
+      <td class="rank-cell">${p.rank}</td>
+      <td style="font-weight:500">${esc(p.name)}</td>
+      <td class="points-cell">${p.points} / ${p.possible}</td>
+      <td class="muted">${p.accuracy}%</td>
+      <td class="muted hide-sm">${p.quizzes}</td>
+    </tr>`).join('');
+
+  board.innerHTML = podiumHTML + `
+    <div class="board-card">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Name</th><th>Points</th><th>Accuracy</th><th class="hide-sm">Quizzes</th>
+        </tr></thead>
+        <tbody>${rowsHTML}</tbody>
+      </table>
+    </div>`;
+}
+
+// ── Copy a plain-text version for pasting into the newsletter ──
+function copyForNewsletter() {
+  const sel = document.getElementById('month-filter');
+  const label = sel.value === 'all' ? 'All-time' : monthLabel(sel.value);
+  const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
+  const lines = [`🏆 ${label} Quiz Leaderboard`, ''];
+  standings.forEach(p => {
+    const marker = medals[p.rank] || ` ${p.rank}.`;
+    lines.push(`${marker} ${p.name} — ${p.points} pts (${p.accuracy}%, ${p.quizzes} quiz${p.quizzes === 1 ? '' : 'zes'})`);
+  });
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy for newsletter'; }, 1500);
+  });
+}
+
+function esc(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+</script>
+</body>
+</html>
