@@ -112,8 +112,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #2';
-const ISSUE_DATE  = 'Week of June 2, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #3';
+const ISSUE_DATE  = 'Week of June 29, 2026';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -122,41 +122,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In due diligence, 'run-rate EBITDA' refers to",
-    options: ["Annualized EBITDA based on recent performance, adjusted for known business changes", "EBITDA calculated strictly per GAAP, with zero adjustments", "EBITDA as reported with no add-backs, exactly as presented in audited financials", "EBITDA from the most recently completed full fiscal year only"],
-    answer: 0,
+    text: "In a restructuring context, a 'debt-for-equity swap' means:",
+    options: ["The company issues new equity to retire outstanding debt", "Creditors convert their debt claims into equity ownership in the company ", "The company exchanges variable-rate debt for fixed-rate instruments", "Equity holders receive debt instruments in exchange for their shares"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "During Chapter 11 Bankruptcy, 'debtor-in-possession' (DIP) refers to:",
-    options: ["A court-appointed trustee who controls the company's operations", "Senior secured creditors who hold first-priority claims", "A new investor providing post-petition rescue financing", "Existing management operating the business during reorganization"],
-    answer: 3,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "In a star schema, fact tables typically contain:",
-    options: ["Descriptive text attributes about customers and products", "Hierarchical category mappings", "Only pre-aggregated summary values", "Quantitative measurements and foreign keys to dimension tables"],
-    answer: 3,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "The key difference between a data lake and a data warehouse:",
-    options: ["Lakes are always cheaper to operate", "Warehouses cannot handle JSON", "Lakes store raw/semi-structured data of any format; warehouses store curated, structured data optimized for analytics", "Warehouses are limited to on-premise deployments"],
+    text: "In a distressed credit situation, a 'waterfall' analysis refers to:",
+    options: ["A schedule showing the flow of cash from revenue down to free cash flow", "An analysis of a utility company's infrastructure and water asset values", "The priority order in which creditors are paid in a liquidation or restructuring", "A dividend distribution schedule from the portco up to the PE holding company"],
     answer: 2,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "Data lineage refers to:",
+    options: ["The legal ownership of a dataset", "Sorting data by timestamp", "The chronological order in which data was created", "The end-to-end path data takes from source through transformations to consumption"],
+    answer: 3,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "Supervised learning differs from unsupervised learning in that:",
+    options: ["Supervised learning runs on a schedule", "Supervised learning uses labeled training data; unsupervised learning does not", "Unsupervised learning requires more compute", "Supervised learning only works on image data"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Whose dog Ringo weighs roughly 235 lbs — a direct challenge to Kyle for largest pet at MERU?",
-    options: ["Ryan Shanken", "Vic Chemtob", "Matt Kazin", "Anna North"],
-    answer: 1,
+    text: "Which MERU employee is a certified indoor cycling instructor:",
+    options: ["Camila Leon", "Frederique Lotin", "Preston Howell", "Ally Will"],
+    answer: 0,
     explanation: "N/A"
   }
 ];
