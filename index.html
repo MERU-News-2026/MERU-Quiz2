@@ -112,8 +112,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #3';
-const ISSUE_DATE  = 'Week of June 29, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #4';
+const ISSUE_DATE  = 'Week of July 6, 2026';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -122,41 +122,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In a restructuring context, a 'debt-for-equity swap' means:",
-    options: ["The company issues new equity to retire outstanding debt", "Creditors convert their debt claims into equity ownership in the company ", "The company exchanges variable-rate debt for fixed-rate instruments", "Equity holders receive debt instruments in exchange for their shares"],
+    text: "A 'forbearance agreement' between a lender and a distressed borrower typically means:",
+    options: ["The lender forgives a portion of the outstanding principal", "The lender temporarily waives its right to enforce default remedies", "The borrower provides additional collateral to secure the loan", "Both parties agree to binding arbitration to resolve a dispute"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In a distressed credit situation, a 'waterfall' analysis refers to:",
-    options: ["A schedule showing the flow of cash from revenue down to free cash flow", "An analysis of a utility company's infrastructure and water asset values", "The priority order in which creditors are paid in a liquidation or restructuring", "A dividend distribution schedule from the portco up to the PE holding company"],
+    text: "An out-of-court restructuring is generally preferred over a formal bankruptcy filing because:",
+    options: ["It is typically faster, less costly, and less disruptive to operations", "It provides stronger legal protection against creditor actions", "It guarantees higher recovery rates for all creditor classes", "It allows easier rejection of burdensome executory contracts"],
+    answer: 0,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "The key difference between ETL and ELT data transformation methods:",
+    options: ["ETL transforms data before loading into the destination; ELT loads raw data first, then transforms inside the destination warehouse", "ETL is the newer approach and replaces ELT", "Only ELT supports SQL", "ETL works exclusively with relational sources"],
+    answer: 0,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "The 'single source of truth' principle aims to:",
+    options: ["Limit the organization to one BI tool", "Eliminate the need for data testing", "Ensure a single authoritative dataset or definition exists for each business concept", "Force all reports to use identical visualizations"],
     answer: 2,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "Data lineage refers to:",
-    options: ["The legal ownership of a dataset", "Sorting data by timestamp", "The chronological order in which data was created", "The end-to-end path data takes from source through transformations to consumption"],
-    answer: 3,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "Supervised learning differs from unsupervised learning in that:",
-    options: ["Supervised learning runs on a schedule", "Supervised learning uses labeled training data; unsupervised learning does not", "Unsupervised learning requires more compute", "Supervised learning only works on image data"],
-    answer: 1,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Which MERU employee is a certified indoor cycling instructor:",
-    options: ["Camila Leon", "Frederique Lotin", "Preston Howell", "Ally Will"],
-    answer: 0,
+    text: "Who has NEVER seen a single Star Wars movie (but can relate almost any conversation to a Seinfeld episode)?",
+    options: ["Blake Lueder", "Brian Bonaviri", "Nick Campbell", "Matt Kazin"],
+    answer: 3,
     explanation: "N/A"
   }
 ];
