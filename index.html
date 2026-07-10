@@ -112,8 +112,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #4';
-const ISSUE_DATE  = 'Week of July 6, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #5';
+const ISSUE_DATE  = 'Week of July 13, 2026';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -122,41 +122,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A 'forbearance agreement' between a lender and a distressed borrower typically means:",
-    options: ["The lender forgives a portion of the outstanding principal", "The lender temporarily waives its right to enforce default remedies", "The borrower provides additional collateral to secure the loan", "Both parties agree to binding arbitration to resolve a dispute"],
-    answer: 1,
+    text: "'Operational restructuring' is best distinguished from 'financial restructuring' by its focus on:",
+    options: ["Renegotiating loan terms to reduce interest expense", "Converting debt to equity to improve the balance sheet", "Cutting costs, divesting non-core assets, and improving operational efficiency", "Issuing new equity to fund near-term working capital needs"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "An out-of-court restructuring is generally preferred over a formal bankruptcy filing because:",
-    options: ["It is typically faster, less costly, and less disruptive to operations", "It provides stronger legal protection against creditor actions", "It guarantees higher recovery rates for all creditor classes", "It allows easier rejection of burdensome executory contracts"],
-    answer: 0,
+    text: "'Customer concentration risk' in due diligence refers to:",
+    options: ["Geographic concentration of the customer base in a single region", ") Over-reliance on a small number of customers for a disproportionate share of revenue", "The risk that customers shift to lower-cost competitive alternatives", "High customer acquisition costs relative to average customer lifetime value"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "The key difference between ETL and ELT data transformation methods:",
-    options: ["ETL transforms data before loading into the destination; ELT loads raw data first, then transforms inside the destination warehouse", "ETL is the newer approach and replaces ELT", "Only ELT supports SQL", "ETL works exclusively with relational sources"],
-    answer: 0,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "The 'single source of truth' principle aims to:",
-    options: ["Limit the organization to one BI tool", "Eliminate the need for data testing", "Ensure a single authoritative dataset or definition exists for each business concept", "Force all reports to use identical visualizations"],
+    text: "Normalizing a database primarily aims to:",
+    options: ["Increase the number of tables for better appearance", "Reduce data redundancy and improve data integrity", "Make queries run without any joins", "Convert all fields to text format"],
     answer: 2,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "A 'slowly changing dimension' (SCD Type 2) is used to:",
+    options: ["Delete outdated dimension records permanently", "Speed up dimension table queries by removing history", "Convert dimension tables into fact tables", "Preserve historical versions of a record when its attributes change over time "],
+    answer: 3,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Who has NEVER seen a single Star Wars movie (but can relate almost any conversation to a Seinfeld episode)?",
-    options: ["Blake Lueder", "Brian Bonaviri", "Nick Campbell", "Matt Kazin"],
-    answer: 3,
+    text: "Who started a high school juggling club and could at one time juggle up to five items?",
+    options: ["Blake Lueder", "Hunter Jackson", "Ari Fabian", "Kevin Kelly"],
+    answer: 1,
     explanation: "N/A"
   }
 ];
