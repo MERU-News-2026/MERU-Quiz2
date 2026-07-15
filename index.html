@@ -115,6 +115,12 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eL
 const ISSUE_LABEL = 'Newsletter · Issue #5';
 const ISSUE_DATE  = 'Week of July 13, 2026';
 
+// ②b Which month this quiz counts toward on the leaderboard.
+//     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
+//     based on when someone actually takes the quiz, so late takers
+//     still count toward the right month.
+const ISSUE_MONTH = '2026-07';
+
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
 //    answer: index of correct option (0 = first)
@@ -351,7 +357,8 @@ function submitResult() {
 
   const correct = answered.filter((a, i) => a === QUESTIONS[i].answer).length;
   const payload = {
-    issue:   ISSUE_LABEL,
+    issue:      ISSUE_LABEL,
+    issueMonth: ISSUE_MONTH,
     name:    participantName,
     email:   participantEmail,
     score:   correct,
