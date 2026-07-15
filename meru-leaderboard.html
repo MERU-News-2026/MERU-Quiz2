@@ -155,7 +155,8 @@ fetch(SHEET_URL + '?action=getResults')
     allRows = (data || []).map(r => ({
       ...r,
       name: String(r.name || '').trim(),
-      date: parseTs(r.timestamp)
+      date: parseTs(r.timestamp),
+      issueMonth: r.issueMonth || 'unassigned'
     })).filter(r => r.name);
     buildMonthFilter();
     renderBoard();
@@ -176,12 +177,15 @@ const MONTH_NAMES = ['January','February','March','April','May','June','July','A
 
 function monthKey(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
 function monthLabel(key) {
+  if (key === 'unassigned') return 'Unassigned quizzes';
   const [y, m] = key.split('-');
   return MONTH_NAMES[parseInt(m, 10) - 1] + ' ' + y;
 }
 
 function buildMonthFilter() {
-  const keys = [...new Set(allRows.filter(r => r.date).map(r => monthKey(r.date)))].sort().reverse();
+  // Groups are driven by each quiz's assigned ISSUE_MONTH (set in index.html),
+  // NOT by when someone happened to submit it.
+  const keys = [...new Set(allRows.map(r => r.issueMonth))].sort().reverse();
   const sel = document.getElementById('month-filter');
   sel.innerHTML = '';
   keys.forEach(k => {
@@ -250,7 +254,7 @@ function renderBoard() {
   const val = sel.value;
   const rows = val === 'all'
     ? allRows
-    : allRows.filter(r => r.date && monthKey(r.date) === val);
+    : allRows.filter(r => r.issueMonth === val);
 
   document.getElementById('hero-eyebrow').textContent =
     val === 'all' ? 'All-time standings' : monthLabel(val) + ' standings';
