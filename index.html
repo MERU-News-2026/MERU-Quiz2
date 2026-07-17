@@ -112,8 +112,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #5';
-const ISSUE_DATE  = 'Week of July 13, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #6';
+const ISSUE_DATE  = 'Week of July 20, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
@@ -128,41 +128,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "'Operational restructuring' is best distinguished from 'financial restructuring' by its focus on:",
-    options: ["Renegotiating loan terms to reduce interest expense", "Converting debt to equity to improve the balance sheet", "Cutting costs, divesting non-core assets, and improving operational efficiency", "Issuing new equity to fund near-term working capital needs"],
-    answer: 2,
+    text: "In restructuring analysis, 'EBITDA normalization' (Adjusted EBITDA) is performed to:",
+    options: ["Inflate earnings to attract potential buyers or new lenders", "Remove non-recurring, unusual, or non-cash items to reflect true operating performance", "Reconcile GAAP and non-GAAP accounting for regulatory filing purposes", "Calculate the company's net present value in a liquidation scenario"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "'Customer concentration risk' in due diligence refers to:",
-    options: ["Geographic concentration of the customer base in a single region", "Over-reliance on a small number of customers for a disproportionate share of revenue", "The risk that customers shift to lower-cost competitive alternatives", "High customer acquisition costs relative to average customer lifetime value"],
+    text: "'First day motions' filed at the outset of a Chapter 11 case are primarily intended to:",
+    options: ["Approve the debtor's plan of reorganization on an expedited basis", "Establish the timeline for creditor committee formation and claims objections", "Obtain immediate court approval for critical operational needs to stabilize the business", "Notify all creditors of their estimated recoveries under the proposed plan"],
+    answer: 2,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "A 'data steward' is primarily responsible for:",
+    options: ["Writing all ETL pipeline code", "Owning the accuracy, quality, and appropriate use of a specific data domain", "Managing physical server infrastructure", "Designing front-end dashboards"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "Normalizing a database primarily aims to:",
-    options: ["Increase the number of tables for better appearance", "Reduce data redundancy and improve data integrity", "Make queries run without any joins", "Convert all fields to text format"],
+    text: "A KPI (Key Performance Indicator) is best described as:",
+    options: ["Any number that appears on a dashboard", "A measurable value that tracks progress toward a specific business objective ", "A synonym for 'data point'", "A one-time report generated for audits"],
     answer: 1,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "A 'slowly changing dimension' (SCD Type 2) is used to:",
-    options: ["Delete outdated dimension records permanently", "Speed up dimension table queries by removing history", "Convert dimension tables into fact tables", "Preserve historical versions of a record when its attributes change over time "],
-    answer: 3,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Who started a high school juggling club and could at one time juggle up to five items?",
-    options: ["Blake Lueder", "Hunter Jackson", "Ari Fabian", "Kevin Kelly"],
-    answer: 1,
+    text: "Surf rescue, two ways: one MERU colleague has rescued two people from drowning while surfing in Peru, and another was rescued from drowning by a pro surfer in Kona, Hawaii. Who's the pair (rescuer → rescued)?",
+    options: ["Noel Garreaud → Jasmine Xu", "Kevin Kelly → Anna Jiwu", "Nitin Agrawal → Camila Leon", "Jasmine Xu → Noel Garreaud"],
+    answer: 0,
     explanation: "N/A"
   }
 ];
