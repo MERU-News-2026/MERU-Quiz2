@@ -112,8 +112,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #6';
-const ISSUE_DATE  = 'Week of July 20, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #7';
+const ISSUE_DATE  = 'Week of July 27, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
@@ -128,41 +128,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In restructuring analysis, 'EBITDA normalization' (Adjusted EBITDA) is performed to:",
-    options: ["Inflate earnings to attract potential buyers or new lenders", "Remove non-recurring, unusual, or non-cash items to reflect true operating performance", "Reconcile GAAP and non-GAAP accounting for regulatory filing purposes", "Calculate the company's net present value in a liquidation scenario"],
-    answer: 1,
+    text: "Under the U.S. Bankruptcy Code, a 'Section 363 sale' allows:",
+    options: ["A debtor to sell assets free and clear of liens and claims with court approval", "A creditor to purchase equity in the reorganized debtor at a discounted price", "A debtor to reject burdensome executory contracts and unexpired leases", "A DIP lender to convert its loan into equity upon plan confirmation"],
+    answer: 0,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "'First day motions' filed at the outset of a Chapter 11 case are primarily intended to:",
-    options: ["Approve the debtor's plan of reorganization on an expedited basis", "Establish the timeline for creditor committee formation and claims objections", "Obtain immediate court approval for critical operational needs to stabilize the business", "Notify all creditors of their estimated recoveries under the proposed plan"],
-    answer: 2,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "A 'data steward' is primarily responsible for:",
-    options: ["Writing all ETL pipeline code", "Owning the accuracy, quality, and appropriate use of a specific data domain", "Managing physical server infrastructure", "Designing front-end dashboards"],
+    text: "Under the WARN Act, covered employers are generally required to provide:",
+    options: ["30 days' advance notice and one week of severance per year of service", "60 days' advance notice before a qualifying mass layoff or plant closing", "Court approval for any workforce reduction exceeding 25 employees", "A retention bonus pool equal to 5% of total annual payroll before restructuring"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "A KPI (Key Performance Indicator) is best described as:",
-    options: ["Any number that appears on a dashboard", "A measurable value that tracks progress toward a specific business objective ", "A synonym for 'data point'", "A one-time report generated for audits"],
+    text: "'Data profiling' refers to:",
+    options: ["Creating user accounts for a database", "Examining a dataset to understand its structure, content, and quality issues", "Assigning access permissions to analysts", "Naming convention standards for tables"],
+    answer: 1,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "The primary purpose of a database index is to:",
+    options: ["Enforce referential integrity between tables", "Speed up data retrieval at the cost of some extra storage and write overhead", "Automatically back up the database", "Prevent duplicate rows from being inserted"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Surf rescue, two ways: one MERU colleague has rescued two people from drowning while surfing in Peru, and another was rescued from drowning by a pro surfer in Kona, Hawaii. Who's the pair (rescuer → rescued)?",
-    options: ["Noel Garreaud → Jasmine Xu", "Kevin Kelly → Anna Jiwu", "Nitin Agrawal → Camila Leon", "Jasmine Xu → Noel Garreaud"],
-    answer: 0,
+    text: "Which MERU team member was ranked in the top 20 in Mumbai for competitive chess growing up?",
+    options: ["Nitin Agrawal", "Akshaj Mehta", "Samir Saleem", "Austin Armor"],
+    answer: 1,
     explanation: "N/A"
   }
 ];
