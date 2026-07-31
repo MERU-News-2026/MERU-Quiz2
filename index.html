@@ -112,14 +112,14 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #7';
-const ISSUE_DATE  = 'Week of July 27, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #8';
+const ISSUE_DATE  = 'Week of August 3, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
 //     based on when someone actually takes the quiz, so late takers
 //     still count toward the right month.
-const ISSUE_MONTH = '2026-07';
+const ISSUE_MONTH = '2026-08';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -128,41 +128,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "Under the U.S. Bankruptcy Code, a 'Section 363 sale' allows:",
-    options: ["A debtor to sell assets free and clear of liens and claims with court approval", "A creditor to purchase equity in the reorganized debtor at a discounted price", "A debtor to reject burdensome executory contracts and unexpired leases", "A DIP lender to convert its loan into equity upon plan confirmation"],
-    answer: 0,
+    text: "The 'absolute priority rule' in Chapter 11 states that:",
+    options: ["All creditors must receive equal pro-rata recoveries regardless of their security interest", "Secured creditors must consent to a plan before the court can confirm it", "Senior claims must be paid in full before junior classes receive any recovery", "Equity holders retain their interests as long as the company continues operating"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "Under the WARN Act, covered employers are generally required to provide:",
-    options: ["30 days' advance notice and one week of severance per year of service", "60 days' advance notice before a qualifying mass layoff or plant closing", "Court approval for any workforce reduction exceeding 25 employees", "A retention bonus pool equal to 5% of total annual payroll before restructuring"],
+    text: "A 'credit bid' in a bankruptcy asset sale allows:",
+    options: ["The DIP lender to convert its loan into a senior equity stake in the reorganized entity", "The debtor to repurchase its own assets using new third-party financing", "A secured creditor to bid up to the face amount of its claim in lieu of cash", "Unsecured creditors to pool their claims and compete with secured lenders in the auction"],
+    answer: 2,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "'Elastic scalability' in cloud data platforms means:",
+    options: ["Data is automatically deleted when unused", "Compute and storage resources can be increased or decreased on demand based on workload", "All queries run at a fixed, unchangeable speed", "Only one user can access the system at a time"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "'Data profiling' refers to:",
-    options: ["Creating user accounts for a database", "Examining a dataset to understand its structure, content, and quality issues", "Assigning access permissions to analysts", "Naming convention standards for tables"],
-    answer: 1,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "The primary purpose of a database index is to:",
-    options: ["Enforce referential integrity between tables", "Speed up data retrieval at the cost of some extra storage and write overhead", "Automatically back up the database", "Prevent duplicate rows from being inserted"],
-    answer: 1,
+    text: "'Overfitting' describes a model that:",
+    options: ["Performs well on training data but poorly on new, unseen data", "Trains too quickly to be useful", "Cannot be deployed to production", "Only works with unsupervised learning"],
+    answer: 0,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Which MERU team member was ranked in the top 20 in Mumbai for competitive chess growing up?",
-    options: ["Nitin Agrawal", "Akshaj Mehta", "Samir Saleem", "Austin Armor"],
-    answer: 1,
+    text: "Which team member loves to smoke meats at home — with St. Louis spareribs and pulled pork as their specialties?",
+    options: ["Justin Owens", "Dennis Berdecia", "Quinterious Hall", "Vic Chemtob"],
+    answer: 0,
     explanation: "N/A"
   }
 ];
