@@ -112,8 +112,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #9';
-const ISSUE_DATE  = 'Week of August 10, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #10';
+const ISSUE_DATE  = 'Week of August 24, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
@@ -128,40 +128,40 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A 'liquidation analysis' in a Chapter 11 restructuring is used to demonstrate that:",
-    options: ["The debtor's assets have sufficient value to repay all creditors in full", "The going concern value of the reorganized business exceeds liquidation value, satisfying the 'best interests of creditors' test ", "The reorganized debtor will generate sufficient free cash flow to service its restructured debt", "The proposed plan distributes value equally among all creditor classes"],
-    answer: 1,
+    text: "In Chapter 11, a 'cash collateral order' is typically required when:",
+    options: ["The debtor seeks to hire a financial advisor or investment banker for the case", "The debtor wants to use 363 sale proceeds to pay administrative claims", "A DIP lender requires additional post-petition collateral beyond the original pledge", "The debtor needs to use pre-petition secured lenders' collateral to fund ongoing operations"],
+    answer: 3,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In a 'sell-side' QoE engagement, who commissions and presents the analysis?",
-    options: ["The buy-side acquirer's investment bank acting as financial advisor", "An independent accounting firm engaged by the seller ", "The target company's internal finance and accounting team", "A court-appointed financial advisor acting as neutral party"],
-    answer: 1,
+    text: "'Representations and warranties' (R&W) in an M&A purchase agreement are primarily used to:",
+    options: ["Guarantee the target company's future financial performance post-acquisition", "Provide the regulatory approvals required to consummate the transaction", "Allocate risk between buyer and seller by disclosing and warranting key facts about the business", "Define the synergy targets management must achieve in the 12 months post-close"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "Data masking is used to:",
-    options: ["It can only run once ever", "Running it multiple times with the same input produces the same result without unintended side effects ", "It processes data faster with each run", "It only works with streaming data"],
-    answer: 1,
+    text: "A LEFT JOIN returns:",
+    options: ["Only matching rows from both tables", "Only rows from the right table", "All rows from the left table, plus matched rows from the right table (with NULLs where there's no match)", "All rows from both tables regardless of match"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "In SQL, the difference between WHERE and HAVING is:",
-    options: ["They are functionally identical and interchangeable", "WHERE filters rows before aggregation; HAVING filters groups after ", "HAVING can only be used with SELECT", "WHERE only works on numeric columns"],
+    text: "A 'data pipeline orchestrator' (e.g., Airflow) is primarily used to:",
+    options: ["Store large volumes of raw data", "Schedule, sequence, and monitor dependent data workflow tasks", "Visualize data in dashboards", "Encrypt data at rest"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Which team member has been skydiving 20+ times",
-    options: ["Dennis Berdecia", "Ryan Shanken", "Daniel Conom", "Justin Owens"],
+    text: "Whose signature bake is a bourbon pecan pie with a salted caramel drizzle?",
+    options: ["Vic Chemtob", "Ally Will", "Dennis Berdecia", "Sloan Jinks"],
     answer: 2,
     explanation: "N/A"
   }
