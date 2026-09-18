@@ -98,6 +98,15 @@
   .restart-btn:hover { background: var(--bg); }
   .submit-note { font-size: 12px; color: var(--text-faint); margin-top: 1rem; }
 
+  /* ─── Missed questions review ──────────────────────────── */
+  .missed-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem 1.75rem; margin-top: 1rem; text-align: left; animation: fadeUp 0.25s ease; }
+  .missed-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--text); margin-bottom: 0.25rem; }
+  .missed-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+  .missed-item { padding: 14px 0; border-top: 1px solid var(--border); }
+  .missed-item:first-of-type { border-top: none; padding-top: 0; }
+  .missed-q { font-size: 14px; font-weight: 500; color: var(--text); margin: 6px 0 6px; line-height: 1.5; }
+  .missed-your-answer { font-size: 13px; color: #b91c1c; background: #fef2f2; border-radius: var(--radius); padding: 7px 11px; display: inline-block; }
+
   /* ─── Footer ──────────────────────────────────────────── */
   .site-footer { text-align: center; margin-top: 3rem; font-size: 12px; color: var(--text-faint); }
 </style>
@@ -113,13 +122,13 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eL
 
 // ② Update issue info each week
 const ISSUE_LABEL = 'Newsletter · Issue #13';
-const ISSUE_DATE  = 'Week of September 14, 2026';
+const ISSUE_DATE  = 'Week of September 21, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
 //     based on when someone actually takes the quiz, so late takers
 //     still count toward the right month.
-const ISSUE_MONTH = '2026-08';
+const ISSUE_MONTH = '2026-09';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -128,41 +137,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A 'reverse termination fee' in an M&A agreement is:",
-    options: ["Paid by the target to the buyer if its board accepts a competing superior proposal", "Paid by the buyer to the target if the buyer fails to close under specified circumstances", "Paid to the seller's financial advisor if the deal fails to receive regulatory approval", "Paid by the seller to compensate the buyer for due diligence costs upon deal termination"],
+    text: "A Chapter 7 bankruptcy differs from Chapter 11 primarily in that Chapter 7:",
+    options: ["Allows the debtor to continue operating and reorganize its debts", "Results in the liquidation of the debtor's assets by a court-appointed trustee", "Is only available to individual consumers, not corporations", "Requires a plan of reorganization to be confirmed by creditors"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In M&A analysis, 'cost synergies' are generally considered more reliable than 'revenue synergies' because:",
-    options: ["Cost synergies are always larger in absolute dollar value than revenue synergies", "Revenue synergies are fully captured within 6 months of close", "Cost synergies are more tangible, within the combined entity's control, and realizable sooner", "Cost synergies require no integration investment or one-time implementation costs"],
-    answer: 2,
+    text: "The 'automatic stay' that goes into effect upon a bankruptcy filing:",
+    options: ["Immediately halts most collection actions, lawsuits, and enforcement efforts against the debtor", "Freezes the debtor's stock price on public exchanges", "Suspends the debtor's obligation to pay post-petition trade vendors", "Automatically converts all secured debt to unsecured debt"],
+    answer: 0,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "A 'data catalog' primarily helps organizations:",
-    options: ["Encrypt sensitive fields automatically", "Discover, document, and understand available datasets across the organization", "Automatically clean dirty data", "Replace the need for a data warehouse"],
+    text: "Cross-validation is used to:",
+    options: ["Combine multiple datasets into one", "Assess how well a model generalizes to unseen data by testing on multiple data splits", "Speed up model training", "Automatically select the best features"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "In dimensional modeling, a 'surrogate key' is:",
-    options: ["A key copied directly from the source system", "A system-generated unique identifier for a dimension record, independent of business meaning ", "A key used only in fact tables", "A text-based description of a record"],
+    text: " A 'feature' in machine learning refers to:",
+    options: ["A software update to a model", "An input variable used by a model to make predictions", "The output prediction of a model", "A bug in the training data"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Which team member has visited 60+ countries and lived in 5 different countries as a kid?",
-    options: ["Jeremy Hardy", "Akshaj Mehta", "Vadim Grakhovskiy", "Anna Jiwu"],
-    answer: 0,
+    text: "Who was featured in the most recent employee spotlight",
+    options: ["Camila Leon", "Bhavik Shah", "Alex Kim", "Vanessa Li"],
+    answer: 3,
     explanation: "N/A"
   }
 ];
@@ -330,6 +339,28 @@ function renderScore() {
   document.getElementById('progress-label').textContent = 'Complete';
   document.getElementById('nav-row').style.display = 'none';
 
+  const missed = QUESTIONS
+    .map((q, i) => ({ q, i, chosen: answered[i] }))
+    .filter(item => item.chosen !== item.q.answer);
+
+  let missedHTML = '';
+  if (missed.length > 0) {
+    const itemsHTML = missed.map(({ q, i, chosen }) => `
+      <div class="missed-item">
+        <span class="cat-pill ${catClass(q.category)}">${q.categoryLabel}</span>
+        <div class="missed-q">Q${i + 1}. ${q.text}</div>
+        <div class="missed-your-answer">Your answer: ${q.options[chosen]}</div>
+      </div>
+    `).join('');
+    missedHTML = `
+      <div class="missed-card">
+        <div class="missed-title">Questions you missed</div>
+        <div class="missed-sub">${missed.length} of ${QUESTIONS.length} — the correct answers will be shared Friday.</div>
+        ${itemsHTML}
+      </div>
+    `;
+  }
+
   document.getElementById('quiz-body').innerHTML = `
     <div class="score-card">
       <div class="score-ring"><div class="score-num">${correct}/${QUESTIONS.length}</div></div>
@@ -340,6 +371,7 @@ function renderScore() {
       </div>
       <div class="submit-note" id="submit-note">Saving your result…</div>
     </div>
+    ${missedHTML}
   `;
 }
 
