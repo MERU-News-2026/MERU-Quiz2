@@ -122,7 +122,7 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eL
 
 // ② Update issue info each week
 const ISSUE_LABEL = 'Newsletter · Issue #13';
-const ISSUE_DATE  = 'Week of September 21, 2026';
+const ISSUE_DATE  = 'Week of September 28, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
@@ -137,41 +137,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A Chapter 7 bankruptcy differs from Chapter 11 primarily in that Chapter 7:",
-    options: ["Allows the debtor to continue operating and reorganize its debts", "Results in the liquidation of the debtor's assets by a court-appointed trustee", "Is only available to individual consumers, not corporations", "Requires a plan of reorganization to be confirmed by creditors"],
+    text: "A 'fraudulent transfer' (or fraudulent conveyance) claim in bankruptcy typically challenges:",
+    options: ["Payments made to secured lenders under a valid intercreditor agreement", "A transfer made for less than reasonably equivalent value while the debtor was insolvent, or with intent to hinder creditors", "Any dividend paid to equity holders more than two years before filing", "Payments to critical vendors approved under a first day motion"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "The 'automatic stay' that goes into effect upon a bankruptcy filing:",
-    options: ["Immediately halts most collection actions, lawsuits, and enforcement efforts against the debtor", "Freezes the debtor's stock price on public exchanges", "Suspends the debtor's obligation to pay post-petition trade vendors", "Automatically converts all secured debt to unsecured debt"],
-    answer: 0,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "Cross-validation is used to:",
-    options: ["Combine multiple datasets into one", "Assess how well a model generalizes to unseen data by testing on multiple data splits", "Speed up model training", "Automatically select the best features"],
+    text: "'Cramdown' in a Chapter 11 plan confirmation refers to:",
+    options: ["Forcing all equity holders to convert their shares into debt instruments", "Confirming a plan over the objection of a dissenting class of creditors, provided statutory requirements are met", "Compressing the plan confirmation timeline to under 90 days", "Reducing secured creditors' claims to the estimated liquidation value only"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: " A 'feature' in machine learning refers to:",
-    options: ["A software update to a model", "An input variable used by a model to make predictions", "The output prediction of a model", "A bug in the training data"],
-    answer: 1,
+    text: "'Data deduplication' refers to:",
+    options: ["Encrypting duplicate records", "Creating backup copies of data", "Splitting one record into multiple tables", "Identifying and removing redundant copies of the same record"],
+    answer: 3,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: " A REST API primarily uses which principle to exchange data?",
+    options: ["Persistent server-side connections only", "Direct database access without a server", "Stateless requests over standard HTTP methods (GET, POST, PUT, DELETE)", "File transfer protocol (FTP) exclusively"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Who was featured in the most recent employee spotlight",
-    options: ["Camila Leon", "Bhavik Shah", "Alex Kim", "Vanessa Li"],
-    answer: 3,
+    text: "Which MERUvian has a dalmatian named Riley?",
+    options: ["Danielle Feldman", "Kyle Sturgeon", "Jeremy Hardy", "Vanessa Li"],
+    answer: 0,
     explanation: "N/A"
   }
 ];
