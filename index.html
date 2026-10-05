@@ -121,14 +121,14 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #13';
-const ISSUE_DATE  = 'Week of September 28, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #14';
+const ISSUE_DATE  = 'Week of October 05, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
 //     based on when someone actually takes the quiz, so late takers
 //     still count toward the right month.
-const ISSUE_MONTH = '2026-09';
+const ISSUE_MONTH = '2026-10';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -137,41 +137,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A 'fraudulent transfer' (or fraudulent conveyance) claim in bankruptcy typically challenges:",
-    options: ["Payments made to secured lenders under a valid intercreditor agreement", "A transfer made for less than reasonably equivalent value while the debtor was insolvent, or with intent to hinder creditors", "Any dividend paid to equity holders more than two years before filing", "Payments to critical vendors approved under a first day motion"],
+    text: "When a debtor 'assumes' an executory contract in bankruptcy, it must generally:",
+    options: ["Renegotiate all pricing terms with the counterparty before assumption", "Cure any existing defaults and provide adequate assurance of future performance", "Obtain unanimous consent from all unsecured creditors", "Convert the contract into an unsecured claim against the estate"],
     answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "'Cramdown' in a Chapter 11 plan confirmation refers to:",
-    options: ["Forcing all equity holders to convert their shares into debt instruments", "Confirming a plan over the objection of a dissenting class of creditors, provided statutory requirements are met", "Compressing the plan confirmation timeline to under 90 days", "Reducing secured creditors' claims to the estimated liquidation value only"],
-    answer: 1,
+    text: "The Official Committee of Unsecured Creditors (UCC) in a Chapter 11 case is primarily responsible for:",
+    options: ["Operating the debtor's business in place of management", "Approving or denying the debtor's DIP financing motion", "Representing the interests of general unsecured creditors and monitoring the case", "Setting the exchange ratio for a debt-for-equity swap"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "'Data deduplication' refers to:",
-    options: ["Encrypting duplicate records", "Creating backup copies of data", "Splitting one record into multiple tables", "Identifying and removing redundant copies of the same record"],
+    text: "'Encryption at rest' refers to:",
+    options: ["Encrypting data while it travels over a network", "Encrypting only user passwords", "A backup strategy unrelated to encryption", "Encrypting data while it is stored on disk"],
     answer: 3,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: " A REST API primarily uses which principle to exchange data?",
-    options: ["Persistent server-side connections only", "Direct database access without a server", "Stateless requests over standard HTTP methods (GET, POST, PUT, DELETE)", "File transfer protocol (FTP) exclusively"],
-    answer: 2,
+    text: "A 'drill-down' feature in a BI dashboard allows users to:",
+    options: ["Navigate from a summary view into more granular, detailed data", "Export data to Excel automatically", "Change the dashboard's color theme", "Schedule automated email reports"],
+    answer: 0,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Which MERUvian has a dalmatian named Riley?",
-    options: ["Danielle Feldman", "Kyle Sturgeon", "Jeremy Hardy", "Vanessa Li"],
-    answer: 0,
+    text: "Which colleague is a first-generation American's who's parents immigrated from Egypt during the Six-Day War in 1967 ",
+    options: ["Samir Saleem", "Akshaj Mehta", "Vic Chemtob", "Deboleena Dhara"],
+    answer: 2,
     explanation: "N/A"
   }
 ];
