@@ -122,7 +122,7 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eL
 
 // ② Update issue info each week
 const ISSUE_LABEL = 'Newsletter · Issue #15';
-const ISSUE_DATE  = 'Week of October 12, 2026';
+const ISSUE_DATE  = 'Week of October 19, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
@@ -137,41 +137,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A 'prepackaged' (pre-pack) bankruptcy is best characterized by:",
-    options: ["The debtor soliciting and obtaining creditor votes on a plan before filing for Chapter 11", "The debtor negotiating exit financing only after the plan is confirmed", "A case where no plan of reorganization is ever required", "A liquidation conducted entirely outside of bankruptcy court"],
-    answer: 0,
+    text: "The 'look-back period' for avoiding constructively fraudulent transfers under state law is typically:",
+    options: ["90 days before the petition date", "Longer than the Bankruptcy Code's own two-year period, often several years depending on state law", "Limited strictly to 90 days for all transfers", "Inapplicable once a case has been filed"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "'Distressed debt' investors who purchase claims at a discount are primarily seeking to:",
-    options: ["Earn a fixed coupon that increases automatically during the case", "Profit from the difference between the discounted purchase price and eventual plan recovery", "Convert their claims to secured status ahead of existing lenders", "Avoid any voting rights in the plan confirmation process"],
-    answer: 1,
+    text: "Administrative expense claims (e.g., post-petition trade debt, professional fees) generally receive:",
+    options: ["Priority ahead of most other unsecured claims, and must typically be paid in full to confirm a plan", "The same priority as pre-petition general unsecured claims", "Priority behind all classes of secured debt but ahead of equity only", "No priority treatment under the absolute priority rule"],
+    answer: 0,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "'Data partitioning' in a large table is used to:",
-    options: ["Encrypt different sections of a table separately", "Split data into smaller, manageable segments to improve query performance", "Remove duplicate columns", "Automatically translate column names"],
-    answer: 1,
+    text: "A 'many-to-many' relationship between two tables is typically resolved using:",
+    options: ["Merging both tables into one", "Deleting one of the tables", "Adding a text field listing all related values", "A junction (bridge) table containing foreign keys to both tables "],
+    answer: 3,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "In an Agile data project, a 'sprint' refers to:",
-    options: ["A one-time final delivery of the entire project", "A fixed, short time period in which a defined set of work is completed", "A meeting held only at project kickoff", "The testing phase after development is complete"],
-    answer: 1,
+    text: "'Serverless computing' means:",
+    options: ["There are no servers involved anywhere in the system", "Applications run only on local machines", "The cloud provider automatically manages server infrastructure, so users focus only on code/logic", "Servers must be manually provisioned before each use"],
+    answer: 2,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "How many new hires did we have in September, 2026?",
-    options: ["2", "6", "12", "10"],
-    answer: 3,
+    text: "Which colleague has a family tradition of celebrating the Fourth of July in a new city every year?",
+    options: ["Vic Chemtob", "Ryan Shanken ", "Sam Stein", "Jason Hanerfeld"],
+    answer: 1,
     explanation: "N/A"
   }
 ];
