@@ -121,14 +121,14 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #15';
-const ISSUE_DATE  = 'Week of October 26, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #18';
+const ISSUE_DATE  = 'Week of November 2, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
 //     based on when someone actually takes the quiz, so late takers
 //     still count toward the right month.
-const ISSUE_MONTH = '2026-10';
+const ISSUE_MONTH = '2026-11';
 
 // ③ Questions — edit each week
 //    category: "industry" | "news" | "general"
@@ -137,41 +137,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "A 'critical vendor' motion filed early in a Chapter 11 case seeks court authority to:",
-    options: ["Reject contracts with vendors who are no longer essential to operations", "Pay certain pre-petition claims of vendors deemed essential to preserve business continuity", "Convert vendor claims into equity in the reorganized company", "Require all vendors to extend new post-petition credit terms"],
-    answer: 1,
+    text: "The 'bar date' in a bankruptcy case refers to:",
+    options: ["The deadline by which creditors must file proofs of claim against the estate", "The date the automatic stay is lifted for secured creditors", "The final date a debtor may propose amendments to its plan", "The date on which the debtor must emerge from Chapter 11"],
+    answer: 0,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "In a restructuring, a 'make-whole premium' is:",
-    options: ["A penalty imposed on management for failing to meet turnaround targets", "A fee paid to the DIP lender solely for providing post-petition financing", "A payment to lenders compensating them for lost future interest when debt is prepaid or accelerated ", "The difference between par value and trading price of unsecured claims"],
+    text: "'Purchase price allocation' (PPA) in M&A accounting requires the acquirer to:",
+    options: ["Distribute acquisition consideration among the selling shareholders on a pro-rata basis", "Allocate M&A advisory fees between the buy-side and sell-side transaction teams", "Divide deal costs between the operating company and the acquirer's holding entity", "Assign the total acquisition price to the fair values of all identifiable assets and liabilities, with any excess recorded as goodwill "],
+    answer: 3,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "A window function (e.g., ROW_NUMBER() OVER (PARTITION BY ...)) is used to:",
+    options: ["Collapse multiple rows into a single row per group", "Permanently reorder the rows in a table", "Perform calculations across related rows while keeping each individual row", "Restrict a query to a specific time range"],
     answer: 2,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "A CTE (Common Table Expression) is:",
-    options: ["A temporary named result set defined with WITH that can be referenced later in the same query ", "A permanent table stored on disk", "A type of index that speeds up joins", "A security role assigned to analysts"],
-    answer: 0,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "'Data retention policy' refers to:",
-    options: ["A rule for how data should be visually formatted", "Guidelines defining how long data should be kept before archival or deletion ", "A method for compressing data", "The list of employees allowed to view a dataset"],
-    answer: 1,
+    text: "The 'grain' of a fact table refers to:",
+    options: ["The number of columns in the table", "The total number of rows in the table", "The data type of the primary key", "The level of detail represented by a single row"],
+    answer: 3,
     explanation: "N/A"
   },
   {
     category: "general",
     categoryLabel: "MERU People Knowledge",
-    text: "Which MERU colleague co-founded future racing?",
-    options: ["Dennis Berdecia", "Marco Musazzi", "Frederique Lotin", "Preston Howell"],
-    answer: 2,
+    text: "Who used to compete in professional Halo tournaments?",
+    options: ["Anna Jiwu", "Dennis Berdecia", "Colin Andrade", "Krishna Antoine"],
+    answer: 1,
     explanation: "N/A"
   }
 ];
