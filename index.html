@@ -121,8 +121,8 @@
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxR3wpKSDV0YrvkbT54eLc4cydBeyfQBRvztFMxSuDTSn1rWbUq_jA1QDs7SxT7ImnWFA/exec';
 
 // ② Update issue info each week
-const ISSUE_LABEL = 'Newsletter · Issue #18';
-const ISSUE_DATE  = 'Week of November 2, 2026';
+const ISSUE_LABEL = 'Newsletter · Issue #19';
+const ISSUE_DATE  = 'Week of November 9, 2026';
 
 // ②b Which month this quiz counts toward on the leaderboard.
 //     Format: 'YYYY-MM'. Set this once per issue — it does NOT change
@@ -137,41 +137,41 @@ const QUESTIONS = [
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "The 'bar date' in a bankruptcy case refers to:",
-    options: ["The deadline by which creditors must file proofs of claim against the estate", "The date the automatic stay is lifted for secured creditors", "The final date a debtor may propose amendments to its plan", "The date on which the debtor must emerge from Chapter 11"],
-    answer: 0,
+    text: "A 'receivership' outside of bankruptcy typically involves:",
+    options: ["The automatic conversion of a company's debt into equity under state law", "A court- or lender-appointed receiver taking control of assets to preserve value", "A voluntary agreement among unsecured creditors to defer collection efforts", "A formal Chapter 11 filing initiated by the company's secured creditors and lenders"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "industry",
     categoryLabel: "F&O",
-    text: "'Purchase price allocation' (PPA) in M&A accounting requires the acquirer to:",
-    options: ["Distribute acquisition consideration among the selling shareholders on a pro-rata basis", "Allocate M&A advisory fees between the buy-side and sell-side transaction teams", "Divide deal costs between the operating company and the acquirer's holding entity", "Assign the total acquisition price to the fair values of all identifiable assets and liabilities, with any excess recorded as goodwill "],
+    text: "In an LBO context, 'net debt' is most accurately defined as:",
+    options: ["Long-term debt minus short-term operating assets, inventory, and accounts receivable", "Total financial debt (including finance leases) minus cash and equivalents", "Senior secured debt minus subordinated unsecured debt of the company", "Total revenues minus total operating expenses and taxes for the period"],
+    answer: 1,
+    explanation: "N/A"
+  },
+  {
+    category: "news",
+    categoryLabel: "DI",
+    text: "Data Modeling: A snowflake schema differs from a star schema in that:",
+    options: ["It can only be used to store unstructured or semi-structured data", "It drops fact tables entirely and relies only on dimension tables", "Dimension tables are fully denormalized into one flat table each", "Dimension tables are normalized into multiple related sub-tables"],
     answer: 3,
     explanation: "N/A"
   },
   {
     category: "news",
     categoryLabel: "DI",
-    text: "A window function (e.g., ROW_NUMBER() OVER (PARTITION BY ...)) is used to:",
-    options: ["Collapse multiple rows into a single row per group", "Permanently reorder the rows in a table", "Perform calculations across related rows while keeping each individual row", "Restrict a query to a specific time range"],
-    answer: 2,
-    explanation: "N/A"
-  },
-  {
-    category: "news",
-    categoryLabel: "DI",
-    text: "The 'grain' of a fact table refers to:",
-    options: ["The number of columns in the table", "The total number of rows in the table", "The data type of the primary key", "The level of detail represented by a single row"],
-    answer: 3,
+    text: "Data Warehousing: The key difference between OLTP and OLAP systems is:",
+    options: ["OLAP is optimized for analytical queries; OLTP for fast daily transactions", "OLAP is built for small real-time transactions; OLTP for historical analysis", "They are simply two different names for the very same type of data system", "OLTP stores only aggregated data, while OLAP stores only raw event logs"],
+    answer: 1,
     explanation: "N/A"
   },
   {
     category: "general",
-    categoryLabel: "MERU People Knowledge",
-    text: "Who used to compete in professional Halo tournaments?",
-    options: ["Anna Jiwu", "Dennis Berdecia", "Colin Andrade", "Krishna Antoine"],
-    answer: 1,
+    categoryLabel: "MERU Knowledge",
+    text: "Where was the first MERU Base Camp",
+    options: ["Garden of the Gods", "Bellagio", "Barnsley Resort", "Serenbe Farms"],
+    answer: 3,
     explanation: "N/A"
   }
 ];
